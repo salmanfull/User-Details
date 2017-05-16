@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -21,6 +21,7 @@
 			result += "<br><br>Company Address:<br>"; 
 		  }
 		result += "</fieldset>";
+		$("#result").css("width","500px");
 		$("#result").html(result);
 	}
   function search(){
@@ -28,8 +29,8 @@
 	  $("#result").css("color","orange");
 	  var email = document.getElementById("email").value;
 	  $.ajax({
-		  type: "POST",
-		  url: "search?email="+email,
+		  type: "GET",
+		  url: "user/"+email,
 		  success: function(user){
 			  if(user===null){
 				  $("#result").html("<h4>No user exist with this Email</h4>");
@@ -51,9 +52,9 @@
 <body>
 <h1>Search User</h1>
 <form action="search" method="post" onsubmit="return search()">
-			SID : <input type="email" name="email" id="email" required><br><br>
+			Email : <input type="email" name="email" id="email" required><br><br>
 			
-  					<input type=submit value="submit">
+  					<input type=submit value="search">
   			
 </form>
 <br>

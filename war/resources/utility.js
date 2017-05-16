@@ -15,3 +15,16 @@ function JSONString(formData) {
 		    }
 		    return JSON.stringify(obj);
 }
+function checkPhone(){
+	$("#phoneerror").html("");
+	//$("#submit").removeAttr("disabled");
+	$("#phone").removeClass("error");
+	var num = $("#phone").val();
+	if(num.toString().length!=10 && num.toString().length!=0){
+		$("#phone").addClass("error");
+		$("#phoneerror").html("Phone number must be of length 10 or null");
+		//$("#submit").attr("disabled","disabled");
+		return false;
+	}
+	return true;
+}

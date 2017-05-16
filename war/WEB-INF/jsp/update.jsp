@@ -12,11 +12,12 @@
     }
 </style>
 <script src="${pageContext.request.contextPath}/resources/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/formDataToJSON.js"></script>
+<script src="${pageContext.request.contextPath}/resources/utility.js"></script>
     <script>
     $(document).ready(function css(){
-    	$("#fs1").css("width","500px");
-    	$("#fs2").css("width","500px");
+    	$("#phone").change(checkPhone);
+    	$("#fs1").css("width","550px");
+    	$("#fs2").css("width","550px");
     	$("#fs2").attr("disabled","disabled");
     	$("#email").focus(function () {
     		$("#email").removeClass("error");
@@ -29,8 +30,8 @@
         var email = document.getElementById("emailcheck").value;
         document.getElementById("myForm").reset();
 	  $.ajax({
-		  type: "POST",
-		  url: "search?email="+email,
+		  type: "GET",
+		  url: "user/"+email,
 		  success: function(user){
 			  if(user===null){
 				  $("#fs2").attr("disabled","disabled");
@@ -57,10 +58,12 @@
     }
 
     function updateUser(){
+    	 if(!checkPhone())
+			  return false;
         var formData = decodeURIComponent($("#myForm").serialize()); 
         var user = JSONString(formData);
         $.ajax({
-			  type: "POST",
+			  type: "PUT",
 			  url: "updateuser?email="+oldemail,
 			  data: user,
 			  success: function(status){
@@ -105,10 +108,10 @@
     <form action="success" id="myForm" method="post" onsubmit="return updateUser()">
 			Name : <input type="text" name="name" id="name" required><br><br>
 			EmailId : <input type="email" name="email" id="email" required><br><br>
-			Phone : <input type="number" name="phone" id="phone"><br><br>
+			Phone : <input type="number" name="phone" id="phone"><span id="phoneerror"></span><br><br>
 			Company Name : <input type="text" name="companyName" id="companyName"><br><br>
 			Company Address : <input type="text" name="companyAddress" id="companyAddress"><br><br>
-  					<input type=submit value="update">
+  					<input type=submit id="submit" value="update">
   			
 	</form>
 	</fieldset>

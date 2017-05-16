@@ -24,7 +24,7 @@ public class UpdateController {
 		return "update";
 	}
     
-    @RequestMapping(value="/updateuser", consumes="application/json", method=RequestMethod.POST)
+    @RequestMapping(value="/updateuser", consumes="application/json", method=RequestMethod.PUT)
 	public @ResponseBody boolean updateUser(@RequestBody User user,@RequestParam String email){
     	if(!email.equalsIgnoreCase(user.getEmail()) && dao.doesUserExist(user.getEmail()))
     		return false;

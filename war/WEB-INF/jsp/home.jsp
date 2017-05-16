@@ -9,6 +9,6 @@
 <body>
     <a href="adduser">Add User</a><br><br>
     <a href="searchuser">Search User details</a><br><br>
-    <a href="updateuser">Update User details</a>
+    <a href="update">Update User details</a>
 </body>
 </html>
