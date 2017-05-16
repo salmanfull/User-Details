@@ -13,7 +13,7 @@ public class User {
 	@PrimaryKey
 	private String email;
 	@Persistent
-	private Long phone;
+	private String phone;
 
 	@Persistent(defaultFetchGroup="true",dependent = "true")
 	private Company company;
@@ -42,11 +42,11 @@ public class User {
 		this.email = email;
 	}
 
-	public Long getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Long phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

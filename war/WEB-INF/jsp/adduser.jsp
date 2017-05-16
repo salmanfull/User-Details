@@ -68,7 +68,7 @@
 			EmailId : <input type="email" name="email" required><br><br>
 			Phone : <input type="number" name="phone" id="phone"><span id="phoneerror"></span><br><br>
 			Company Name : <input type="text" name="companyName"><br><br>
-			Company Address : <input type="text" name="companyAddress"><br><br>
+			Company Address : <textarea rows="5" cols="30" name="companyAddress"></textarea><br><br>
   					<input type=submit id="submit" value="submit">
   			
 	</form>
