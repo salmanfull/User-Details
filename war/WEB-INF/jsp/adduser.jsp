@@ -8,26 +8,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
+
 <style type="text/css">
 	.error {
     color: #D8000C;
     background-color: #FFBABA;
     }
+    span.errormsg {
+    color: red;
+    }
+    
 </style>
 <script src="${pageContext.request.contextPath}/resources/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/utility.js"></script>
 <script>
 
-	$(document).ready(function () {
-		
-		$("#phone").blur(checkPhone);
-		
-	});
+	$(document).ready(resetErrorMsg);
 	  function addUser(){
-		  if(!checkPhone()){
-			  $("#status").html("");
+		  if(!validateForm())
 			  return false;
-		  }
 		  $("#status").html("<h4>Wait...Storing user details</h4>");
 		  $("#status").css("color","orange");
 			var formData = decodeURIComponent($("#myForm").serialize()); 
@@ -64,11 +63,16 @@
 	<h1>Add User Details</h1>
 	
 	<form action="success" id="myForm" method="post" onsubmit="return addUser()">
-			Name : <input type="text" name="name" required><br><br>
-			EmailId : <input type="email" name="email" required><br><br>
-			Phone : <input type="number" name="phone" id="phone"><span id="phoneerror"></span><br><br>
+			Name : <input type="text" name="name" id="name" required><span class="errormsg" id="nameerror"></span><br><br>
+			EmailId : <input type="text" name="email" id="email" required><span class="errormsg" id="emailerror"></span><br><br>
+			Phone : <input type="number" name="phone" id="phone"><span class="errormsg" id="phoneerror"></span><br><br>
 			Company Name : <input type="text" name="companyName"><br><br>
-			Company Address : <textarea rows="5" cols="30" name="companyAddress"></textarea><br><br>
+			 Address1 : <input type="text" name="address1"><br><br>
+			 Address2 : <input type="text" name="address2"><br><br>
+			 City : <input type="text" name="city"><br><br>
+			 State : <input type="text" name="state"><br><br>
+			 Country : <input type="text" name="country"><br><br>
+			 Zipcode : <input type="text" name="zipcode"><br><br>
   					<input type=submit id="submit" value="submit">
   			
 	</form>

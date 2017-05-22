@@ -1,4 +1,4 @@
-package com.full;
+package com.full.bean;
 
 import javax.jdo.annotations.Element;
 import javax.jdo.annotations.PersistenceCapable;
@@ -39,7 +39,7 @@ public class User {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email.toLowerCase();
 	}
 
 	public String getPhone() {

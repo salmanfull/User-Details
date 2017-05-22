@@ -1,4 +1,4 @@
-package com.full;
+package com.full.helper;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;

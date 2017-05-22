@@ -7,9 +7,11 @@
 
 
 	<context:annotation-config></context:annotation-config>
-	<bean id="user" class="com.full.User"></bean>
-	<bean id="UserDao" class="com.full.UserDao"></bean>
-	<bean id="Company" class="com.full.Company"></bean>
+	<bean id="user" class="com.full.bean.User"></bean>
+	<bean id="UserDao" class="com.full.dao.UserDao"></bean>
+	<bean id="PercentDao" class="com.full.dao.PercentageTrackerDao"></bean>
+	<bean id="PercentService" class="com.full.service.PercentageTrackerService"></bean>
+	<bean id="Company" class="com.full.bean.Company"></bean>
 	
 <!-- 	<bean id="userDatabase" class="com.full.db.UserDatabase"></bean> -->
 </beans>

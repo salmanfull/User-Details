@@ -1,4 +1,4 @@
-package com.full;
+package com.full.controller;
 
 import java.io.PrintWriter;
 import java.util.HashMap;

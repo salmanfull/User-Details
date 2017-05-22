@@ -6,22 +6,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <style type="text/css">
+	.w3-light-grey,.w3-hover-light-grey:hover,.w3-light-gray,.w3-hover-light-gray:hover{color:#000!important;background-color:#f1f1f1!important}
+	.w3-container,.w3-panel{padding:0.01em 16px}
+	.w3-container:after,.w3-container:before{content:"";display:table;clear:both}
+	.w3-red,.w3-hover-red:hover{color:#fff!important;background-color:#f44336!important}
+	.w3-orange,.w3-hover-orange:hover{color:#000!important;background-color:#ff9800!important}
+	.w3-green,.w3-hover-green:hover{color:#fff!important;background-color:#4CAF50!important}
+	.w3-center{display:inline-block;width:auto;text-align:center;text-align:center!important}
+	.w3-round-xlarge{border-radius:16px}
+	.w3-round,.w3-round-medium{border-radius:4px}
 	.error {
     color: #D8000C;
     background-color: #FFBABA;
+    }
+    span.errormsg {
+    color: red;
     }
 </style>
 <script src="${pageContext.request.contextPath}/resources/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/utility.js"></script>
     <script>
     $(document).ready(function css(){
-    	$("#phone").change(checkPhone);
-    	$("#fs1").css("width","550px");
-    	$("#fs2").css("width","550px");
+    	$("#fs1").css("width","560px");
+    	$("#fs2").css("width","560px");
     	$("#fs2").attr("disabled","disabled");
-    	$("#email").focus(function () {
-    		$("#email").removeClass("error");
-    	});
+    	resetErrorMsg();
     });
     var oldemail;
     function showuser(){
@@ -32,24 +41,20 @@
 	  $.ajax({
 		  type: "GET",
 		  url: "user/"+email,
-		  success: function(user){
-			  if(user===null){
+		  success: function(returnedUserData){
+			  if(returnedUserData===null){
 				  $("#fs2").attr("disabled","disabled");
 				  $("#error").html("No user exist with this Email");
 				  $("#error").css("color","red");
+				  $("#progressContainer").html("");
                   return false;
 			  }
               else{
             	  $("#fs2").removeAttr("disabled");
                   oldemail = document.getElementById("emailcheck").value;
             	  $("#error").html("");
-                  document.getElementById("name").value = user.name;
-                  document.getElementById("phone").value = user.phone;
-                  document.getElementById("email").value = user.email;
-                  if(user.company){
-                  document.getElementById("companyName").value = user.company.companyName;
-                  document.getElementById("companyAddress").value = user.company.companyAddress;
-                  }
+            	  showUserInForm(returnedUserData);
+                  
               }
        },
 	  dataType: "json"
@@ -58,13 +63,13 @@
     }
 
     function updateUser(){
-    	 if(!checkPhone())
+    	 if(!validateForm())
 			  return false;
         var formData = decodeURIComponent($("#myForm").serialize()); 
         var user = JSONString(formData);
         $.ajax({
 			  type: "PUT",
-			  url: "updateuser?email="+oldemail,
+			  url: "updateuser/"+oldemail,
 			  data: user,
 			  success: function(status){
 				  if(status){
@@ -74,6 +79,7 @@
 					  document.getElementById("getEmail").reset();
 					  $("#status").html("<h4>User details updated successfully</h4>");
 					  $("#status").css("color","green");
+					  $("#progressContainer").html("");
 				  }
 				  else
 					  {
@@ -103,18 +109,27 @@
     </form>
    </fieldset>
    <br><br>
+<!--    <b><span id="percent" class="percent"></span></b> -->
+	<div id="progressContainer"></div>
+   <br><br>
    <fieldset id="fs2">
 <legend>Update</legend>
     <form action="success" id="myForm" method="post" onsubmit="return updateUser()">
-			Name : <input type="text" name="name" id="name" required><br><br>
-			EmailId : <input type="email" name="email" id="email" required><br><br>
-			Phone : <input type="number" name="phone" id="phone"><span id="phoneerror"></span><br><br>
+			Name : <input type="text" name="name" id="name" required><span class="errormsg" id="nameerror"></span><br><br>
+			EmailId : <input type="text" name="email" id="email" required><span class="errormsg" id="emailerror"></span><br><br>
+			Phone : <input type="number" name="phone" id="phone"><span class="errormsg" id="phoneerror"></span><br><br>
 			Company Name : <input type="text" name="companyName" id="companyName"><br><br>
-			Company Address : <textarea rows="5" cols="30" name="companyAddress" id="companyAddress"></textarea><br><br>
+			Address1 : <input type="text" name="address1" id="address1"><br><br>
+			 Address2 : <input type="text" name="address2" id="address2"><br><br>
+			 City : <input type="text" name="city" id="city"><br><br>
+			 State : <input type="text" name="state" id="state"><br><br>
+			 Country : <input type="text" name="country" id="country"><br><br>
+			 Zipcode : <input type="number" name="zipcode" id="zipcode"><br><br>
   					<input type=submit id="submit" value="update">
   			
 	</form>
 	</fieldset>
+	
 	<span id="status"></span>
 </body>
 </html>

@@ -1,8 +1,11 @@
-package com.full;
+package com.full.dao;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Transaction;
+
+import com.full.bean.User;
+import com.full.helper.PMF;
 
 public class UserDao {
 	public boolean doesUserExist(String email){
@@ -38,7 +41,7 @@ public class UserDao {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		User user = null;
 		try {
-			user = pm.getObjectById(User.class, email);
+			user = pm.getObjectById(User.class, email.toLowerCase());
         } finally {
             pm.close();
         }
@@ -48,7 +51,7 @@ public class UserDao {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		User user = null;
 		try {
-			user = pm.getObjectById(User.class, email);
+			user = pm.getObjectById(User.class, email.toLowerCase());
 			pm.deletePersistent(user);
         } finally {
             pm.close();
