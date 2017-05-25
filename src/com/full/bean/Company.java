@@ -24,7 +24,7 @@ public class Company {
 		return companyName;
 	}
 	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+		this.companyName = companyName.trim();
 	}
 	public Address getCompanyAddress() {
 		return companyAddress;

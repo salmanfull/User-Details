@@ -72,7 +72,7 @@
 			 City : <input type="text" name="city"><br><br>
 			 State : <input type="text" name="state"><br><br>
 			 Country : <input type="text" name="country"><br><br>
-			 Zipcode : <input type="text" name="zipcode"><br><br>
+			 Zipcode : <input type="number" name="zipcode"><br><br>
   					<input type=submit id="submit" value="submit">
   			
 	</form>

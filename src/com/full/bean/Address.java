@@ -35,6 +35,7 @@ public class Address {
 			return address1;
 		}
 		public void setAddress1(String address1) {
+			address1=address1.trim();
 			persistanceDecider(address1);
 			this.address1 = address1;
 		}
@@ -42,6 +43,7 @@ public class Address {
 			return address2;
 		}
 		public void setAddress2(String address2) {
+			address2=address2.trim();
 			persistanceDecider(address2);
 			this.address2 = address2;
 		}
@@ -49,6 +51,7 @@ public class Address {
 			return city;
 		}
 		public void setCity(String city) {
+			city = city.trim();
 			persistanceDecider(city);
 			this.city = city;
 		}
@@ -56,6 +59,7 @@ public class Address {
 			return state;
 		}
 		public void setState(String state) {
+			state = state.trim();
 			persistanceDecider(state);
 			this.state = state;
 		}
@@ -63,6 +67,7 @@ public class Address {
 			return country;
 		}
 		public void setCountry(String country) {
+			country = country.trim();
 			persistanceDecider(country);
 			this.country = country;
 		}
@@ -70,6 +75,7 @@ public class Address {
 			return zipcode;
 		}
 		public void setZipcode(String zipcode) {
+			zipcode = zipcode.trim();
 			persistanceDecider(zipcode);
 			this.zipcode = zipcode;
 		}

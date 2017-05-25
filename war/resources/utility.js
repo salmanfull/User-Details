@@ -8,7 +8,7 @@ function JSONString(formData) {
 		    for(var index in data)
 		    {
 		    	var key=data[index].split("=")[0];
-		    	var value = data[index].split("=")[1];
+		    	var value = data[index].split("=")[1].trim();
 		    	if(index==3){ 
 		    		if(value!=="")
 		    			company_obj[key]=value;

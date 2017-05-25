@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -51,6 +52,7 @@ public class SearchController {
 	    		resp.getWriter().print("null");
 	    		return null;
 	    	}
+	    	
 	    	Map<String,Object> map = new LinkedHashMap<String, Object>();
 	    	map.put("user", dao.getUser(email) );
 	    	map.put("percent", percentageService.get(email));
